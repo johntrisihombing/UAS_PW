@@ -1,0 +1,97 @@
+<?php
+include('koneksi.php');
+$id = $_GET['id'];
+$tampil = mysqli_query($koneksi, "SELECT * from barang WHERE id='$id'");
+if (mysqli_num_rows($tampil) == 0) {
+    echo '<script>window.history.back()</script>';
+} else {
+    $data = mysqli_fetch_assoc($tampil);
+}
+
+
+?>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <title>CRUD_PHP</title>
+</head>
+<style>
+    body {
+        background-color: #f3f6f9;
+    }
+</style>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">MyWatch Store</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.php">Beranda</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="admin.php">Halaman Admin</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Header -->
+    <div class="container">
+        <h1 class="text-center mt-3">Edit Data</h1>
+        <!--Awal Card Form -->
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Form Edit Data
+            </div>
+            <div class="card-body">
+
+                <form action="aksi_edit.php" method="POST">
+                    <div class="form-group">
+                        <label for=""></label>
+                        <input type="hidden" name="id" value="<?php echo $data["id"]; ?>" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Nama</label>
+                        <input type="text" name="nama" value="<?php echo $data["nama"]; ?>" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Deskripsi</label>
+                        <input type="text" name="deskripsi" value="<?php echo $data["deskripsi"]; ?>" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Harga</label>
+                        <input type="text" name="harga" value="<?php echo $data["harga"]; ?>" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Gambar</label>
+                        <input type="text" name="gambar" value="<?php echo $data["gambar"]; ?>" class="form-control" placeholder="Masukkan Gambar" required>
+                    </div>
+                    <button type="submit" class="btn-success" name="ubah" value="ubah">Ubah Data</button>
+                </form>
+            </div>
+        </div>
+        <!--Akhir Card Form -->
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>
